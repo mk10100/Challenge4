@@ -1,0 +1,140 @@
+/* Reset some default styles */
+body,
+h1,
+p,
+ul,
+li {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f2f2f2;
+}
+
+/* Style the quiz container */
+.quiz-container {
+  max-width: 600px;
+  margin: 0 auto;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+/* Style the initials input container */
+#initials-container {
+  margin-bottom: 20px;
+}
+
+#initials-input {
+  padding: 10px;
+  width: 100px;
+  text-transform: uppercase;
+}
+
+/* Style the Start button on a separate line */
+#start-button {
+  display: block;
+  margin: 10px auto;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  text-align: center;
+  border-radius: 25px;
+}
+
+#start-button:hover {
+  background-color: #0056b3;
+}
+
+/* Style the Next button */
+#next-button {
+  margin-top: 20px; /* Add margin to separate it from the previous button */
+  padding: 10px 20px; /* Larger padding */
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  border-radius: 25px;
+  display: inline-block; /* Button appears on the same line */
+}
+
+#next-button:hover {
+  background-color: #0056b3;
+}
+
+/* Style paragraphs */
+p {
+  font-size: 18px;
+  margin: 10px 0;
+}
+
+/* Style question container */
+#question-container {
+  text-align: left;
+}
+
+/* Style lists and list items */
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  margin: 10px 0;
+}
+
+/* Style radio buttons */
+input[type="radio"] {
+  margin-right: 10px;
+}
+
+/* Style scoreboard container */
+#scoreboard-container {
+  margin-top: 20px;
+}
+
+#scoreboard-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+/* Style all scores container */
+#all-scores-container {
+  margin-top: 20px;
+}
+
+#all-scores-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+/* Style the "Show Scoreboard" button */
+#all-scores-container button {
+  margin-top: 10px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  border-radius: 25px;
+  display: inline-block;
+}
+
+#all-scores-container button:hover {
+  background-color: #0056b3;
+  text-align: center;
+}

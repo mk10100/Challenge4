@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JavaScript Quiz</title>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <script src="script.js"></script>
+  </head>
+  <body>
+    <div class="quiz-container">
+      <h1>JavaScript Quiz</h1>
+      <div id="initials-container">
+        <label for="initials-input">Enter Your Initials:</label>
+        <input
+          type="text"
+          id="initials-input"
+          maxlength="3"
+          placeholder="Your Initials"
+        />
+        <button id="start-button">Start</button>
+      </div>
+      <div id="question-container" style="display: none"></div>
+      <p>Score: <span id="score">0</span></p>
+      <button id="next-button" style="display: none">Next</button>
+    </div>
+    <div id="save-score-container" style="display: none">
+      <label for="initials">Enter Your Initials:</label>
+      <input
+        type="text"
+        id="initials"
+        maxlength="3"
+        placeholder="Your Initials"
+      />
+      <button id="save-score-button">Save Score</button>
+    </div>
+    <div id="scoreboard-container" style="display: none">
+      <h2>Scoreboard</h2>
+      <ul id="scoreboard-list"></ul>
+    </div>
+    <div id="game-over-container" style="display: none">
+      <h2>Game Over!</h2>
+      <p>Your score: <span id="final-score">0</span></p>
+      <div id="all-scores-container">
+        <h2>All Scores</h2>
+        <ul id="all-scores-list"></ul>
+      </div>
+    </div>
+    <div id="congratulations-container" style="display: none">
+      <h2>Congratulations!</h2>
+      <p>You got all questions right!</p>
+    </div>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const questions = [
+          {
+            question: "Who created JavaScript?",
+            options: [
+              "Brendan Eich",
+              "Mark Zuckerberg",
+              "Steve Jobs",
+              "Bill Gates",
+            ],
+            correctAnswer: 0,
+          },
+          {
+            question: "In what year was JavaScript first introduced?",
+            options: ["1995", "2000", "2005", "2010"],
+            correctAnswer: 0,
+          },
+          {
+            question: "What was JavaScript initially called?",
+            options: ["JavaScript", "ScriptEase", "LiveScript", "WebScript"],
+            correctAnswer: 2,
+          },
+          {
+            question: "Which programming languages influenced JavaScript?",
+            options: ["Python", "Java", "Perl", "All of the above"],
+            correctAnswer: 3,
+          },
+          {
+            question: "What is ECMAScript?",
+            options: [
+              "A type of coffee",
+              "A version of JavaScript",
+              "A web browser",
+              "An operating system",
+            ],
+            correctAnswer: 1,
+          },
+        ];
+        const questionContainer = document.getElementById("question-container");
+        const scoreSpan = document.getElementById("score");
+        const nextButton = document.getElementById("next-button");
+        const startButton = document.getElementById("start-button");
+        const initialsInput = document.getElementById("initials-input");
+        const saveScoreButton = document.getElementById("save-score-button");
+        const initialsContainer = document.getElementById("initials-container");
+        const congratulationsContainer = document.getElementById(
+          "congratulations-container"
+        );
+
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let scoreboard = [];
+
+        function startGame() {
+          initialsContainer.style.display = "none";
+          questionContainer.style.display = "block";
+          nextButton.style.display = "inline";
+          displayQuestion(); // Display the first question
+        }
+
+        function endGame() {
+          const finalScoreSpan = document.getElementById("final-score");
+          finalScoreSpan.textContent = score + "/" + questions.length;
+
+          document.getElementById("question-container").style.display = "none";
+          document.getElementById("next-button").style.display = "none";
+          document.getElementById("game-over-container").style.display =
+            "block";
+
+          if (score === questions.length) {
+            congratulationsContainer.style.display = "block";
+          } else {
+            congratulationsContainer.style.display = "none";
+          }
+
+          const initials = initialsInput.value.trim();
+          if (initials !== "") {
+            const scoreItem = { initials, score };
+            scoreboard.push(scoreItem);
+          }
+
+          displayScoreboard();
+          displayAllScores();
+        }
+
+        function isAnswerCorrect() {
+          const selectedOption = document.querySelector(
+            'input[name="answer"]:checked'
+          );
+          if (!selectedOption) return false;
+
+          const selectedAnswer = parseInt(selectedOption.value);
+
+          return (
+            selectedAnswer === questions[currentQuestionIndex].correctAnswer
+          );
+        }
+
+        function displayScoreboard() {
+          // Implement the scoreboard display logic
+        }
+
+        function displayAllScores() {
+          // Implement the display of all scores logic
+        }
+        function displayQuestion() {
+          if (currentQuestionIndex < questions.length) {
+            const currentQuestion = questions[currentQuestionIndex];
+            questionContainer.innerHTML = `
+      <h2>${currentQuestion.question}</h2>
+      <ul>
+        ${currentQuestion.options
+          .map(
+            (option, index) => `
+              <li>
+                <input type="radio" name="answer" value="${index}" id="option${index}">
+                <label for="option${index}">${option}</label>
+              </li>
+            `
+          )
+          .join("")}
+      </ul>
+    `;
+          } else {
+            endGame(); // End the game when all questions are answered
+          }
+        }
+        function checkAnswer() {
+          if (isAnswerCorrect()) {
+            score++;
+          }
+          scoreSpan.textContent = score;
+
+          currentQuestionIndex++;
+          if (currentQuestionIndex < questions.length) {
+            displayQuestion(); // Display the next question
+          } else {
+            endGame(); // End the game when all questions are answered
+          }
+        }
+
+        startButton.addEventListener("click", () => {
+          document.getElementById("initials-container").style.display = "none";
+          questionContainer.style.display = "block";
+          nextButton.style.display = "inline";
+          displayQuestion(); // Display the first question
+
+          // Add the event listener for the "Next" button after it is displayed
+          nextButton.addEventListener("click", checkAnswer);
+        });
+      });
+    </script>
+  </body>
+</html>
